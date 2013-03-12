@@ -3,6 +3,7 @@
     `configure_vagrant`. Takes an array of arrays that are injected into the
     Vagrantfile as `vm.customize` lines. Patch by Greg Thornton.
   * Fixes around Net::SSH use of sudo and PTYs.
+  * Some additional information about configuration in `chef-workflow-bootstrap`.
 * 0.2.1 February 20, 2013
   * Fixate JSON dependnecy to keep knife from breaking in bundles.
 * 0.2.0 February 8, 2013 
