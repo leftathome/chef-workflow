@@ -67,6 +67,15 @@ end
 configure_vagrant do
   # if you wish to use a different box, supply it as a url here.
   # box_url "http://files.vagrantup.com/precise32.box"
+  #
+  # if you wish to customize the vms, such as modify the memory usage, use an
+  # array of arrays here. each inner array will be added to the vagrant files
+  # generated.
+  #
+  # example: customizations [ ["modifyvm", :id, "--memory", 1024] ]
+  # 
+  # customizations nil
+  # 
 end
 
 configure_knife do
@@ -97,7 +106,7 @@ configure_knife do
   # Note that you must have the 'minitest-handler' cookbook available on your
   # chef server for these to work.
   # 
-  # test_recipes []
+  # test_recipes [ ]
 end
 
 #
@@ -135,6 +144,9 @@ configure_ec2 do
   # need something more complicated, create your own groups by hand and set
   # `security_groups` above to those values. 
   # security_group_open_ports [22, 4000]
+  #
+  # how long to wait for the ec2 API before giving up.
+  # provision_wait 300
 end
 
 #
