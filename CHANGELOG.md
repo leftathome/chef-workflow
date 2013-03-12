@@ -1,7 +1,7 @@
 * 0.2.2 March 12, 2013
   * Vagrant box customizations via "customizations" attribute in
     `configure_vagrant`. Takes an array of arrays that are injected into the
-    Vagrantfile. Patch by Greg Thornton.
+    Vagrantfile as `vm.customize` lines. Patch by Greg Thornton.
   * Fixes around Net::SSH use of sudo and PTYs.
 * 0.2.1 February 20, 2013
   * Fixate JSON dependnecy to keep knife from breaking in bundles.
