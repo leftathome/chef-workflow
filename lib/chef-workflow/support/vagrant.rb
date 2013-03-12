@@ -7,6 +7,7 @@ module ChefWorkflow
   # Vagrant configuration settings. Uses `GenericSupport`.
   #
   class VagrantSupport
+    extend ChefWorkflow::AttrSupport
     include ChefWorkflow::GenericSupport
 
     # The default vagrant box we use for provisioning.
