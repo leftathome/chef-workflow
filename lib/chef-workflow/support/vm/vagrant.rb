@@ -70,7 +70,11 @@ module ChefWorkflow
         prison.configure do |config|
           config.vm.box_url = ChefWorkflow::VagrantSupport.box_url
           config.vm.box = ChefWorkflow::VagrantSupport.box
-          ChefWorkflow::VagrantSupport.customizations.each { |c| config.vm.customize c }
+
+          if customizations = ChefWorkflow::VagrantSupport.customizations
+            customizations.each { |c| config.vm.customize c }
+          end
+
           number_of_servers.times do |x|
             ip = ChefWorkflow::IPSupport.unused_ip
             ChefWorkflow::IPSupport.assign_role_ip(name, ip)
