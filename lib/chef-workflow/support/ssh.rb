@@ -34,7 +34,8 @@ module ChefWorkflow
     # heavy use of KnifeSupport to determine how to drive the command.
     #
     def configure_ssh_command(ip, command)
-      command = "#{ChefWorkflow::KnifeSupport.use_sudo ? 'sudo ': ''}#{command}"
+      use_sudo = ChefWorkflow::KnifeSupport.use_sudo
+      command = "#{use_sudo ? 'sudo ': ''}#{command}"
 
       options = { }
 
@@ -43,6 +44,12 @@ module ChefWorkflow
 
       Net::SSH.start(ip, ChefWorkflow::KnifeSupport.ssh_user, options) do |ssh|
         ssh.open_channel do |ch|
+          ch.request_pty do |ch, success|
+            if !success and use_sudo
+              raise "The use_sudo setting requires a PTY, and your SSH is rejecting our attempt to get one."
+            end
+          end
+
           ch.on_open_failed do |ch, code, desc|
             raise "Connection Error to #{ip}: #{desc}"
           end
