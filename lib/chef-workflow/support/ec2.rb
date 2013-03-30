@@ -66,7 +66,7 @@ module ChefWorkflow
           $stderr.puts "Seeing if security group name #{name} is taken"
         end
 
-        break unless aws_ec2.security_groups[name].exists?
+        break unless aws_ec2.security_groups.filter('group-name', [name]).first
         sleep 0.3
       end
 
