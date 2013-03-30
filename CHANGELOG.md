@@ -1,3 +1,5 @@
+* 0.2.3 March 30, 2013
+  * fix a bug where the automated security group generator would never actually find a collision
 * 0.2.2 March 12, 2013
   * Vagrant box customizations via "customizations" attribute in
     `configure_vagrant`. Takes an array of arrays that are injected into the
