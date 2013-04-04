@@ -1,3 +1,7 @@
+* 0.2.4 April 4, 2013
+  * Fixed situations where client bootstrap fails due to a bad recipe, and the
+    run_list isn't preserved, which meant to do further converges you would
+    need to edit the node manually.
 * 0.2.3 March 30, 2013
   * fix a bug where the automated security group generator would never actually find a collision
 * 0.2.2 March 12, 2013
