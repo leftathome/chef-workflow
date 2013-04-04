@@ -203,10 +203,20 @@ module ChefWorkflow
           # knife bootstrap is the honey badger when it comes to exit status.
           # We can't rely on it, so we examine the run_list of the node instead
           # to ensure it converged.
-          run_list_size = Chef::Node.load(node_name).run_list.to_a.size rescue 0
+          node = Chef::Node.load(node_name) rescue nil
+          run_list_size = node ? (node.run_list.to_a.size rescue 0) : 0
           unless run_list_size > 0
             puts bootstrap_cli.ui.stdout.string
             puts bootstrap_cli.ui.stderr.string
+
+            if node
+              #
+              # hack for bad first-converges that preserves the run list.
+              #
+              @run_list.each { |i| node.run_list.add(i) unless node.run_list.include?(i) }
+              node.save
+            end
+
             raise "bootstrap for #{node_name}/#{ip} wasn't successful."
           end
           if_debug(2) do
